@@ -67,6 +67,30 @@
   --slide-accent: var(--secondary-cyan-soft);
 }
 
+.slide-target {
+  --slide-primary: var(--primary-blue);
+  --slide-secondary: var(--primary-blue-light);
+  --slide-accent: var(--primary-blue-soft);
+}
+
+.slide-process {
+  --slide-primary: var(--primary-blue-light);
+  --slide-secondary: var(--secondary-cyan);
+  --slide-accent: var(--primary-blue-soft);
+}
+
+.slide-results {
+  --slide-primary: var(--success-green);
+  --slide-secondary: var(--success-emerald);
+  --slide-accent: var(--success-green-soft);
+}
+
+.slide-cta {
+  --slide-primary: var(--accent-purple);
+  --slide-secondary: var(--accent-violet);
+  --slide-accent: var(--accent-purple-soft);
+}
+
 /* ===== 기본 리셋 ===== */
 * {
   margin: 0;

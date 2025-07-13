@@ -3,7 +3,7 @@
 class DataAnalysisSlideshow {
   constructor() {
     this.currentSlide = 0;
-    this.totalSlides = 2;
+    this.totalSlides = 6; // 6개 슬라이드로 업데이트
     this.animationTimings = slideData.animations;
     this.init();
   }
@@ -218,6 +218,18 @@ class DataAnalysisSlideshow {
         break;
       case 1:
         this.initSlide2();
+        break;
+      case 2:
+        this.initSlide3();
+        break;
+      case 3:
+        this.initSlide4();
+        break;
+      case 4:
+        this.initSlide5();
+        break;
+      case 5:
+        this.initSlide6();
         break;
     }
   }
@@ -561,6 +573,541 @@ class DataAnalysisSlideshow {
       `
     };
     return details[solutionName] || "상세 정보를 준비 중입니다.";
+  }
+
+  // 슬라이드 3 초기화
+  initSlide3() {
+    setTimeout(() => this.createHeatmap(), 200);
+    setTimeout(() => this.createAutomationChart(), 400);
+    setTimeout(() => this.addSlide3Interactions(), 600);
+  }
+
+  // 슬라이드 4 초기화
+  initSlide4() {
+    setTimeout(() => this.createGanttChart(), 200);
+    setTimeout(() => this.createRACIMatrix(), 400);
+    setTimeout(() => this.createMilestones(), 600);
+    setTimeout(() => this.addSlide4Interactions(), 800);
+  }
+
+  // 슬라이드 5 초기화
+  initSlide5() {
+    setTimeout(() => this.setupROICalculator(), 200);
+    setTimeout(() => this.createCumulativeChart(), 400);
+    setTimeout(() => this.animateKPICards(), 600);
+    setTimeout(() => this.addSlide5Interactions(), 800);
+  }
+
+  // 슬라이드 6 초기화
+  initSlide6() {
+    setTimeout(() => this.createActionItems(), 200);
+    setTimeout(() => this.createInvestmentTimeline(), 400);
+    setTimeout(() => this.addSlide6Interactions(), 600);
+  }
+
+  // 히트맵 생성
+  createHeatmap() {
+    const container = document.getElementById('heatmap-grid');
+    if (!container) return;
+
+    const data = slideData.slide3.heatmapData.departments;
+    const maxDemand = slideData.slide3.heatmapData.maxDemand;
+
+    data.forEach(dept => {
+      const cell = document.createElement('div');
+      cell.className = 'heatmap-cell';
+      
+      // 강도 계산 (1-5 단계)
+      const intensity = Math.ceil((dept.demand / maxDemand) * 5);
+      cell.classList.add(`intensity-${intensity}`);
+      
+      cell.innerHTML = `
+        <div class="cell-name">${dept.name}</div>
+        <div class="cell-demand">${dept.demand}건/월</div>
+      `;
+      
+      cell.setAttribute('data-tooltip', `${dept.name}: ${dept.demand}건/월 - ${dept.description}`);
+      
+      cell.addEventListener('click', () => {
+        this.showModal(`${dept.name} 상세 분석`, `
+          <p><strong>월 평균 요청:</strong> ${dept.demand}건</p>
+          <p><strong>주요 분석 영역:</strong> ${dept.description}</p>
+          <p><strong>자동화 우선순위:</strong> ${dept.demand > 20 ? '높음' : dept.demand > 10 ? '중간' : '낮음'}</p>
+          <p><strong>예상 효과:</strong> ${Math.round(dept.demand * 0.6)}건 자동화 가능</p>
+        `);
+      });
+
+      container.appendChild(cell);
+    });
+  }
+
+  // 자동화 가능성 차트 생성
+  createAutomationChart() {
+    const container = document.getElementById('automation-bars');
+    if (!container) return;
+
+    const data = slideData.slide3.automationPotential;
+
+    data.forEach((item, index) => {
+      const barWrapper = document.createElement('div');
+      barWrapper.className = 'automation-bar';
+
+      barWrapper.innerHTML = `
+        <div class="bar-label">${item.type}</div>
+        <div class="bar-container">
+          <div class="bar-fill" style="width: 0%;" data-width="${item.automated}">
+            <div class="bar-percentage">${item.automated}%</div>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(barWrapper);
+
+      // 애니메이션
+      setTimeout(() => {
+        const fill = barWrapper.querySelector('.bar-fill');
+        fill.style.width = item.automated + '%';
+      }, index * 200);
+    });
+  }
+
+  // 간트 차트 생성
+  createGanttChart() {
+    const container = document.getElementById('gantt-timeline');
+    if (!container) return;
+
+    const phases = slideData.slide4.phases;
+
+    phases.forEach((phase, phaseIndex) => {
+      const phaseElement = document.createElement('div');
+      phaseElement.className = 'gantt-phase';
+      
+      phaseElement.innerHTML = `
+        <div class="phase-header">
+          <div class="phase-color" style="background-color: ${phase.color}"></div>
+          <div class="phase-title">${phase.name}</div>
+          <div class="phase-duration">${phase.duration}</div>
+        </div>
+        <div class="gantt-tasks" id="phase-${phaseIndex}-tasks"></div>
+      `;
+
+      container.appendChild(phaseElement);
+
+      const tasksContainer = document.getElementById(`phase-${phaseIndex}-tasks`);
+      
+      phase.tasks.forEach((task, taskIndex) => {
+        const taskElement = document.createElement('div');
+        taskElement.className = 'gantt-task';
+        
+        const startPercent = (task.start / 24) * 100;
+        const widthPercent = (task.weeks / 24) * 100;
+        
+        taskElement.innerHTML = `
+          <div class="task-name">${task.name}</div>
+          <div class="task-bar-container">
+            <div class="task-bar" style="
+              background-color: ${phase.color}; 
+              left: ${startPercent}%; 
+              width: 0%;
+              transition: width 0.8s ease-out;
+              transition-delay: ${(phaseIndex * 4 + taskIndex) * 200}ms;
+            " data-width="${widthPercent}">
+              <div class="task-weeks">${task.weeks}주</div>
+            </div>
+          </div>
+        `;
+
+        tasksContainer.appendChild(taskElement);
+
+        // 애니메이션
+        setTimeout(() => {
+          const bar = taskElement.querySelector('.task-bar');
+          bar.style.width = widthPercent + '%';
+        }, (phaseIndex * 4 + taskIndex) * 200 + 500);
+      });
+    });
+  }
+
+  // RACI 매트릭스 생성
+  createRACIMatrix() {
+    const tbody = document.getElementById('raci-tbody');
+    if (!tbody) return;
+
+    const raci = slideData.slide4.raci;
+
+    raci.activities.forEach(activity => {
+      const row = document.createElement('tr');
+      
+      let rowHTML = `<td style="text-align: left; font-weight: 600;">${activity.activity}</td>`;
+      
+      activity.raci.forEach(role => {
+        rowHTML += `<td class="raci-${role.toLowerCase()}">${role}</td>`;
+      });
+      
+      row.innerHTML = rowHTML;
+      tbody.appendChild(row);
+    });
+  }
+
+  // 마일스톤 생성
+  createMilestones() {
+    const container = document.getElementById('milestones-list');
+    if (!container) return;
+
+    const milestones = slideData.slide4.timeline.milestones;
+
+    milestones.forEach((milestone, index) => {
+      const milestoneElement = document.createElement('div');
+      milestoneElement.className = 'milestone';
+      
+      milestoneElement.innerHTML = `
+        <div class="milestone-week">W${milestone.week}</div>
+        <div class="milestone-title">${milestone.title}</div>
+      `;
+
+      milestoneElement.addEventListener('click', () => {
+        this.showModal(`${milestone.title} 상세`, `
+          <p><strong>완료 시점:</strong> ${milestone.week}주차</p>
+          <p><strong>주요 산출물:</strong> ${milestone.deliverable}</p>
+          <p><strong>중요도:</strong> 높음</p>
+        `);
+      });
+
+      container.appendChild(milestoneElement);
+
+      // 순차 애니메이션
+      setTimeout(() => {
+        milestoneElement.style.opacity = '0';
+        milestoneElement.style.transform = 'translateX(-10px)';
+        milestoneElement.style.transition = 'all 0.3s ease';
+        
+        setTimeout(() => {
+          milestoneElement.style.opacity = '1';
+          milestoneElement.style.transform = 'translateX(0)';
+        }, 50);
+      }, index * 150);
+    });
+  }
+
+  // ROI 계산기 설정
+  setupROICalculator() {
+    const investmentSlider = document.getElementById('investment-slider');
+    const hoursSlider = document.getElementById('hours-slider');
+    const rateSlider = document.getElementById('rate-slider');
+    
+    const investmentValue = document.getElementById('investment-value');
+    const hoursValue = document.getElementById('hours-value');
+    const rateValue = document.getElementById('rate-value');
+    
+    const resultsContainer = document.getElementById('roi-results');
+
+    if (!investmentSlider || !resultsContainer) return;
+
+    const updateROI = () => {
+      const investment = parseInt(investmentSlider.value);
+      const hours = parseInt(hoursSlider.value);
+      const rate = parseInt(rateSlider.value);
+
+      // 값 업데이트
+      investmentValue.textContent = `${investment}백만원`;
+      hoursValue.textContent = `${hours.toLocaleString()}시간`;
+      rateValue.textContent = `${rate.toLocaleString()}원`;
+
+      // ROI 계산
+      const annualSavings = (hours * rate) / 1000000; // 백만원 단위
+      const paybackPeriod = investment / annualSavings;
+      const fiveYearSavings = annualSavings * 5;
+      const netBenefit = fiveYearSavings - investment;
+      const roi = (netBenefit / investment) * 100;
+
+      resultsContainer.innerHTML = `
+        <div class="roi-result-item">
+          <span class="result-label">연간 절감액</span>
+          <span class="result-value">${annualSavings.toFixed(1)}억원</span>
+        </div>
+        <div class="roi-result-item">
+          <span class="result-label">투자 회수 기간</span>
+          <span class="result-value">${paybackPeriod.toFixed(1)}년</span>
+        </div>
+        <div class="roi-result-item">
+          <span class="result-label">5년 ROI</span>
+          <span class="result-value">${roi.toFixed(0)}%</span>
+        </div>
+        <div class="roi-result-item">
+          <span class="result-label">순 효익</span>
+          <span class="result-value">${netBenefit.toFixed(1)}억원</span>
+        </div>
+      `;
+    };
+
+    // 이벤트 리스너
+    investmentSlider.addEventListener('input', updateROI);
+    hoursSlider.addEventListener('input', updateROI);
+    rateSlider.addEventListener('input', updateROI);
+
+    // 초기 계산
+    updateROI();
+  }
+
+  // 누적 효과 차트 생성
+  createCumulativeChart() {
+    const svg = document.getElementById('cumulative-svg');
+    if (!svg) return;
+
+    const data = slideData.slide5.cumulativeEffect;
+    const width = 400;
+    const height = 200;
+    const margin = { top: 20, right: 20, bottom: 30, left: 40 };
+
+    svg.setAttribute('viewBox', `0 0 ${width} ${height}`);
+
+    // 축 생성
+    const xScale = (index) => margin.left + (index / (data.years.length - 1)) * (width - margin.left - margin.right);
+    const yScale = (value) => height - margin.bottom - ((value + 1000) / 3000) * (height - margin.top - margin.bottom);
+
+    // 선 생성 함수
+    const createLine = (values, className) => {
+      let pathData = `M ${xScale(0)} ${yScale(values[0])}`;
+      for (let i = 1; i < values.length; i++) {
+        pathData += ` L ${xScale(i)} ${yScale(values[i])}`;
+      }
+      
+      const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+      path.setAttribute('d', pathData);
+      path.setAttribute('class', className);
+      
+      return path;
+    };
+
+    // 선들 추가
+    svg.appendChild(createLine(data.investment, 'line-investment'));
+    svg.appendChild(createLine(data.savings, 'line-savings'));
+    svg.appendChild(createLine(data.netBenefit, 'line-benefit'));
+
+    // 점들 추가
+    data.years.forEach((year, index) => {
+      [data.investment, data.savings, data.netBenefit].forEach((values, lineIndex) => {
+        const circle = document.createElementNS('http://www.w3.org/2000/svg', 'circle');
+        circle.setAttribute('cx', xScale(index));
+        circle.setAttribute('cy', yScale(values[index]));
+        circle.setAttribute('r', 4);
+        circle.setAttribute('fill', ['#ea580c', '#10b981', '#3b82f6'][lineIndex]);
+        svg.appendChild(circle);
+      });
+    });
+  }
+
+  // KPI 카드 애니메이션
+  animateKPICards() {
+    const progressBars = document.querySelectorAll('.kpi-progress-bar');
+    
+    progressBars.forEach((bar, index) => {
+      setTimeout(() => {
+        const width = bar.getAttribute('data-width');
+        bar.style.width = width + '%';
+      }, index * 200);
+    });
+  }
+
+  // 액션 아이템 생성
+  createActionItems() {
+    const container = document.getElementById('action-items');
+    if (!container) return;
+
+    const actions = slideData.slide6.actionItems;
+
+    actions.forEach((action, index) => {
+      const actionElement = document.createElement('div');
+      actionElement.className = 'action-item';
+      
+      actionElement.innerHTML = `
+        <div class="action-checkbox" data-action-id="${action.id}"></div>
+        <div class="action-content">
+          <div class="action-title">${action.title}</div>
+          <div class="action-description">${action.description}</div>
+          <div class="action-meta">
+            <span class="action-owner">${action.owner}</span>
+            <span class="action-deadline">${action.deadline}</span>
+          </div>
+        </div>
+      `;
+
+      container.appendChild(actionElement);
+
+      // 클릭 이벤트
+      actionElement.addEventListener('click', () => {
+        const checkbox = actionElement.querySelector('.action-checkbox');
+        checkbox.classList.toggle('checked');
+        
+        if (checkbox.classList.contains('checked')) {
+          this.showModal(`${action.title} 상세 계획`, `
+            <p><strong>담당자:</strong> ${action.owner}</p>
+            <p><strong>완료 목표:</strong> ${action.deadline}</p>
+            <p><strong>우선순위:</strong> ${action.priority}</p>
+            <p><strong>상세 내용:</strong> ${action.description}</p>
+            <h4 style="margin: 1rem 0 0.5rem;">다음 단계:</h4>
+            <ul style="margin: 0; padding-left: 1rem;">
+              <li>관련 이해관계자 식별 및 협의</li>
+              <li>상세 실행 계획 수립</li>
+              <li>주간 진행상황 보고</li>
+            </ul>
+          `);
+        }
+      });
+
+      // 순차 애니메이션
+      setTimeout(() => {
+        actionElement.style.opacity = '0';
+        actionElement.style.transform = 'translateY(20px)';
+        actionElement.style.transition = 'all 0.4s ease';
+        
+        setTimeout(() => {
+          actionElement.style.opacity = '1';
+          actionElement.style.transform = 'translateY(0)';
+        }, 50);
+      }, index * 150);
+    });
+  }
+
+  // 투자 타임라인 생성
+  createInvestmentTimeline() {
+    const container = document.getElementById('investment-timeline-chart');
+    if (!container) return;
+
+    const data = slideData.slide6.investmentTimeline;
+    const maxValue = Math.max(...data.investment, ...data.returns);
+
+    const barsContainer = document.createElement('div');
+    barsContainer.className = 'timeline-bars-container';
+
+    data.quarters.forEach((quarter, index) => {
+      const barGroup = document.createElement('div');
+      barGroup.className = 'timeline-bar-group';
+
+      const investmentHeight = (data.investment[index] / maxValue) * 80;
+      const returnsHeight = (data.returns[index] / maxValue) * 80;
+
+      barGroup.innerHTML = `
+        <div class="timeline-bar-investment" 
+             style="height: 0%; transition: height 0.8s ease-out; transition-delay: ${index * 200}ms;" 
+             data-height="${investmentHeight}%"></div>
+        <div class="timeline-bar-returns" 
+             style="height: 0%; transition: height 0.8s ease-out; transition-delay: ${index * 200 + 100}ms;" 
+             data-height="${returnsHeight}%"></div>
+        <div class="timeline-label">${quarter}</div>
+      `;
+
+      barsContainer.appendChild(barGroup);
+    });
+
+    container.appendChild(barsContainer);
+
+    // BEP 표시
+    const breakevenIndicator = document.createElement('div');
+    breakevenIndicator.className = 'breakeven-indicator';
+    breakevenIndicator.textContent = `BEP: ${data.breakeven}`;
+    container.appendChild(breakevenIndicator);
+
+    // 애니메이션 시작
+    setTimeout(() => {
+      const investmentBars = container.querySelectorAll('.timeline-bar-investment');
+      const returnsBars = container.querySelectorAll('.timeline-bar-returns');
+
+      investmentBars.forEach(bar => {
+        bar.style.height = bar.getAttribute('data-height');
+      });
+
+      returnsBars.forEach(bar => {
+        bar.style.height = bar.getAttribute('data-height');
+      });
+    }, 500);
+  }
+
+  // 슬라이드 3 인터랙션
+  addSlide3Interactions() {
+    console.log('슬라이드 3 인터랙션 설정 완료');
+  }
+
+  // 슬라이드 4 인터랙션
+  addSlide4Interactions() {
+    const taskBars = document.querySelectorAll('.task-bar');
+    taskBars.forEach(bar => {
+      bar.addEventListener('mouseenter', () => {
+        bar.style.opacity = '0.8';
+        bar.style.transform = 'scaleY(1.1)';
+      });
+
+      bar.addEventListener('mouseleave', () => {
+        bar.style.opacity = '1';
+        bar.style.transform = 'scaleY(1)';
+      });
+    });
+  }
+
+  // 슬라이드 5 인터랙션
+  addSlide5Interactions() {
+    const kpiCards = document.querySelectorAll('.kpi-card');
+    kpiCards.forEach(card => {
+      card.addEventListener('click', () => {
+        const name = card.querySelector('.kpi-name').textContent;
+        const current = card.querySelector('.kpi-current').textContent;
+        const target = card.querySelector('.kpi-target').textContent;
+        const improvement = card.querySelector('.kpi-improvement').textContent;
+
+        this.showModal(`${name} 상세 분석`, `
+          <div style="display: flex; justify-content: space-between; margin-bottom: 1rem;">
+            <div>
+              <strong>현재:</strong> ${current}<br>
+              <strong>목표:</strong> ${target}<br>
+              <strong>개선율:</strong> ${improvement}
+            </div>
+          </div>
+          <h4>달성 방법:</h4>
+          <ul>
+            <li>단계적 자동화 시스템 도입</li>
+            <li>사용자 교육 및 변화 관리</li>
+            <li>지속적 성과 모니터링</li>
+            <li>피드백 기반 개선</li>
+          </ul>
+          <p><strong>예상 달성 시기:</strong> 프로젝트 완료 후 3개월 내</p>
+        `);
+      });
+    });
+  }
+
+  // 슬라이드 6 인터랙션
+  addSlide6Interactions() {
+    console.log('슬라이드 6 인터랙션 설정 완료');
+  }
+
+  // 연락처 모달 표시
+  showContactModal() {
+    const contactInfo = slideData.slide6.ctaDetails;
+    this.showModal('프로젝트 시작하기', `
+      <div style="text-align: center; margin-bottom: 2rem;">
+        <h3 style="color: var(--accent-purple); margin-bottom: 1rem;">🚀 데이터 혁신 여정을 시작하세요!</h3>
+        <p>전문 컨설팅 팀이 귀하의 성공을 위해 준비되어 있습니다.</p>
+      </div>
+      
+      <div style="background: var(--glass-bg); padding: 1.5rem; border-radius: 12px; margin-bottom: 1.5rem;">
+        <h4 style="margin-bottom: 1rem;">📞 연락처 정보</h4>
+        <p><strong>담당자:</strong> ${contactInfo.contact.name}</p>
+        <p><strong>이메일:</strong> ${contactInfo.contact.email}</p>
+        <p><strong>전화:</strong> ${contactInfo.contact.phone}</p>
+        <p><strong>부서:</strong> ${contactInfo.contact.department}</p>
+      </div>
+
+      <div style="background: linear-gradient(135deg, var(--accent-purple), var(--accent-violet)); padding: 1.5rem; border-radius: 12px; color: white;">
+        <h4 style="margin-bottom: 1rem;">⚡ 다음 단계</h4>
+        <ul style="margin: 0; padding-left: 1rem;">
+          ${contactInfo.nextSteps.map(step => `<li>${step}</li>`).join('')}
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin-top: 1.5rem; font-size: 0.875rem; color: var(--text-muted);">
+        <p><em>${contactInfo.urgency}</em></p>
+      </div>
+    `);
   }
 }
 
