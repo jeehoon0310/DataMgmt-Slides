@@ -1,0 +1,603 @@
+/* 슬라이드별 전용 스타일과 컴포넌트 */
+
+/* ===== 슬라이드 1: 문제 정의/현황 분석 ===== */
+.slide-1 {
+  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 100%);
+}
+
+.slide-1 .slide-content {
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: var(--space-lg);
+  height: 100%;
+}
+
+.problem-summary {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.problem-chart {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeline-chart {
+  grid-column: 1;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.bottleneck-info {
+  grid-column: 2;
+  grid-row: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.key-metric {
+  background: linear-gradient(135deg, var(--warning-orange) 0%, var(--warning-amber) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 3.5rem;
+  font-weight: 800;
+  margin-bottom: var(--space-sm);
+}
+
+.metric-description {
+  color: var(--text-secondary);
+  font-size: 1.125rem;
+  margin-bottom: var(--space-md);
+}
+
+/* ===== 원형 차트 스타일 ===== */
+.pie-chart-container {
+  position: relative;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+}
+
+.pie-chart {
+  width: 100%;
+  height: auto;
+  transform: rotate(-90deg);
+}
+
+.pie-slice {
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.pie-slice:hover {
+  opacity: 0.8;
+  transform: scale(1.05);
+  transform-origin: center;
+}
+
+.chart-legend {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+}
+
+.legend-color {
+  width: 12px;
+  height: 12px;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+/* ===== 타임라인 차트 스타일 ===== */
+.timeline-container {
+  width: 100%;
+}
+
+.timeline-bars {
+  display: flex;
+  align-items: end;
+  gap: var(--space-sm);
+  height: 200px;
+  margin-bottom: var(--space-md);
+}
+
+.timeline-bar {
+  flex: 1;
+  background: linear-gradient(180deg, var(--warning-orange) 0%, var(--warning-amber) 100%);
+  border-radius: 4px 4px 0 0;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 20px;
+  transform-origin: bottom;
+  animation: barGrow 1s ease-out forwards;
+  transform: scaleY(0);
+}
+
+.timeline-bar:hover {
+  opacity: 0.8;
+  transform: scaleY(1) scale(1.05);
+}
+
+.timeline-bar.bar-2023 { height: 60%; animation-delay: 0.2s; }
+.timeline-bar.bar-2024 { height: 80%; animation-delay: 0.4s; }
+.timeline-bar.bar-2025 { height: 100%; animation-delay: 0.6s; }
+
+@keyframes barGrow {
+  to { transform: scaleY(1); }
+}
+
+.timeline-labels {
+  display: flex;
+  justify-content: space-between;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+.bar-value {
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 0.75rem;
+  color: var(--text-accent);
+  font-weight: 600;
+}
+
+/* ===== 병목 현상 아이콘 ===== */
+.bottleneck-icon {
+  font-size: 4rem;
+  color: var(--warning-orange);
+  margin-bottom: var(--space-md);
+  animation: pulse 2s infinite;
+}
+
+.bottleneck-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-md);
+  width: 100%;
+}
+
+.stat-item {
+  text-align: center;
+  padding: var(--space-md);
+  background: rgba(var(--warning-orange), 0.1);
+  border-radius: 8px;
+  border: 1px solid rgba(var(--warning-orange), 0.2);
+}
+
+.stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--warning-orange);
+  margin-bottom: var(--space-xs);
+}
+
+.stat-label {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* ===== 슬라이드 2: 솔루션/아이디어 제시 ===== */
+.slide-2 {
+  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 100%);
+}
+
+.slide-2 .slide-content {
+  grid-template-columns: 1fr 2fr 1fr;
+  grid-template-rows: 1fr auto;
+  gap: var(--space-lg);
+  height: 100%;
+}
+
+.before-metrics {
+  grid-column: 1;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.process-flow {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.after-metrics {
+  grid-column: 3;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: var(--space-md);
+}
+
+.solution-icons {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  display: flex;
+  justify-content: center;
+  gap: var(--space-xl);
+  padding: var(--space-lg) 0;
+}
+
+/* ===== 프로세스 플로우차트 ===== */
+.flow-chart {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.flow-section {
+  position: relative;
+}
+
+.flow-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.flow-steps {
+  display: flex;
+  align-items: center;
+  gap: var(--space-sm);
+}
+
+.flow-step {
+  flex: 1;
+  background: var(--glass-bg);
+  border: 1px solid var(--glass-border);
+  border-radius: 8px;
+  padding: var(--space-md);
+  text-align: center;
+  position: relative;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.flow-step:hover {
+  background: rgba(var(--secondary-teal), 0.1);
+  border-color: var(--secondary-teal);
+  transform: translateY(-2px);
+}
+
+.flow-step.current {
+  background: linear-gradient(135deg, var(--secondary-teal) 0%, var(--secondary-cyan) 100%);
+  color: white;
+  border-color: var(--secondary-teal);
+}
+
+.flow-step.improved {
+  background: linear-gradient(135deg, var(--success-green) 0%, var(--success-emerald) 100%);
+  color: white;
+  border-color: var(--success-green);
+}
+
+.step-title {
+  font-size: 0.875rem;
+  font-weight: 600;
+  margin-bottom: var(--space-xs);
+}
+
+.step-time {
+  font-size: 0.75rem;
+  opacity: 0.8;
+}
+
+.flow-arrow {
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  transition: all 0.3s ease;
+}
+
+.flow-section:hover .flow-arrow {
+  color: var(--secondary-teal);
+  transform: scale(1.2);
+}
+
+/* ===== Before/After 메트릭 카드 ===== */
+.metrics-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: var(--space-md);
+  text-align: center;
+}
+
+.metrics-section.before h3 {
+  color: var(--warning-orange);
+}
+
+.metrics-section.after h3 {
+  color: var(--success-green);
+}
+
+.metric-comparison {
+  background: var(--glass-bg);
+  border-radius: 8px;
+  padding: var(--space-md);
+  text-align: center;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+}
+
+.metric-comparison:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+.comparison-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-bottom: var(--space-xs);
+}
+
+.before .comparison-value {
+  color: var(--warning-orange);
+}
+
+.after .comparison-value {
+  color: var(--success-green);
+}
+
+.comparison-label {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+}
+
+.improvement-indicator {
+  font-size: 0.75rem;
+  font-weight: 600;
+  margin-top: var(--space-xs);
+  padding: 2px 8px;
+  border-radius: 12px;
+  display: inline-block;
+}
+
+.improvement-positive {
+  background: rgba(var(--success-green), 0.2);
+  color: var(--success-green);
+}
+
+.improvement-negative {
+  background: rgba(var(--warning-orange), 0.2);
+  color: var(--warning-orange);
+}
+
+/* ===== 솔루션 아이콘 ===== */
+.solution-icon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--glass-bg);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.solution-icon:hover {
+  transform: translateY(-5px) scale(1.05);
+  background: rgba(var(--secondary-teal), 0.1);
+  border-color: var(--secondary-teal);
+  box-shadow: 0 12px 30px rgba(var(--secondary-teal), 0.3);
+}
+
+.icon-symbol {
+  font-size: 2.5rem;
+  color: var(--secondary-teal);
+  margin-bottom: var(--space-sm);
+}
+
+.icon-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-align: center;
+}
+
+.icon-description {
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  text-align: center;
+  line-height: 1.4;
+}
+
+/* ===== 툴팁 시스템 ===== */
+.tooltip {
+  position: absolute;
+  background: var(--background-dark);
+  color: var(--text-primary);
+  padding: var(--space-sm);
+  border-radius: 8px;
+  font-size: 0.75rem;
+  white-space: nowrap;
+  z-index: 1000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.tooltip.show {
+  opacity: 1;
+}
+
+.tooltip::before {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: var(--background-dark);
+}
+
+/* ===== 네비게이션 ===== */
+.slide-navigation {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: var(--space-sm);
+  z-index: 1000;
+}
+
+.nav-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.3);
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.nav-dot.active {
+  background: var(--accent-purple);
+  transform: scale(1.2);
+}
+
+.nav-dot:hover {
+  background: rgba(255, 255, 255, 0.6);
+  transform: scale(1.1);
+}
+
+/* ===== 모달 시스템 ===== */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+}
+
+.modal-overlay.show {
+  opacity: 1;
+  pointer-events: all;
+}
+
+.modal-content {
+  background: var(--background-medium);
+  border-radius: 16px;
+  padding: var(--space-xl);
+  max-width: 500px;
+  width: 90%;
+  border: 1px solid var(--glass-border);
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.modal-overlay.show .modal-content {
+  transform: scale(1);
+}
+
+.modal-header {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: var(--space-md);
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover {
+  color: var(--text-primary);
+}
+
+/* ===== 반응형 슬라이드 레이아웃 ===== */
+@media (max-width: 1024px) {
+  .slide-1 .slide-content,
+  .slide-2 .slide-content {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+    gap: var(--space-md);
+  }
+
+  .solution-icons {
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+
+  .flow-steps {
+    flex-direction: column;
+    gap: var(--space-md);
+  }
+
+  .flow-arrow {
+    transform: rotate(90deg);
+  }
+}
+
+@media (max-width: 768px) {
+  .bottleneck-stats {
+    grid-template-columns: 1fr;
+  }
+
+  .timeline-bars {
+    height: 150px;
+  }
+
+  .key-metric {
+    font-size: 2.5rem;
+  }
+
+  .solution-icon {
+    padding: var(--space-md);
+  }
+
+  .icon-symbol {
+    font-size: 2rem;
+  }
+}

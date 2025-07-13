@@ -1,0 +1,402 @@
+/* 데이터분석 팀 관리 슬라이드 디자인 시스템 */
+/* 프로젝트: 데이터분석 팀 관리 개선 프레젠테이션 */
+/* 폰트: Pretendard */
+
+@import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css');
+
+/* ===== 컬러 시스템 ===== */
+:root {
+  /* Primary - 신뢰성과 전문성 (블루 계열) */
+  --primary-blue: #1e3a8a;
+  --primary-blue-light: #3b82f6;
+  --primary-blue-soft: #60a5fa;
+
+  /* Secondary - 데이터와 기술 (청록 계열) */
+  --secondary-teal: #0891b2;
+  --secondary-cyan: #06b6d4;
+  --secondary-cyan-soft: #67e8f9;
+
+  /* Success - 성과와 개선 (녹색 계열) */
+  --success-green: #059669;
+  --success-emerald: #10b981;
+  --success-green-soft: #6ee7b7;
+
+  /* Warning - 문제점과 주의사항 (주황 계열) */
+  --warning-orange: #ea580c;
+  --warning-amber: #f97316;
+  --warning-orange-soft: #fdba74;
+
+  /* Accent - 강조와 CTA (보라 계열) */
+  --accent-purple: #7c3aed;
+  --accent-violet: #8b5cf6;
+  --accent-purple-soft: #c4b5fd;
+
+  /* Background & Glass */
+  --background-dark: #0f172a;
+  --background-medium: #1e293b;
+  --background-light: #334155;
+  --glass-bg: rgba(30, 41, 59, 0.8);
+  --glass-border: rgba(255, 255, 255, 0.1);
+
+  /* Text Palette */
+  --text-primary: #f8fafc;
+  --text-secondary: #cbd5e1;
+  --text-muted: #94a3b8;
+  --text-accent: #e2e8f0;
+
+  /* Spacing System */
+  --space-xs: 0.5rem;   /* 8px */
+  --space-sm: 1rem;     /* 16px */
+  --space-md: 1.5rem;   /* 24px */
+  --space-lg: 2rem;     /* 32px */
+  --space-xl: 3rem;     /* 48px */
+  --space-2xl: 4rem;    /* 64px */
+  --space-3xl: 6rem;    /* 96px */
+}
+
+/* ===== 슬라이드별 색상 매핑 ===== */
+.slide-problem {
+  --slide-primary: var(--warning-orange);
+  --slide-secondary: var(--warning-amber);
+  --slide-accent: var(--warning-orange-soft);
+}
+
+.slide-solution {
+  --slide-primary: var(--secondary-teal);
+  --slide-secondary: var(--secondary-cyan);
+  --slide-accent: var(--secondary-cyan-soft);
+}
+
+/* ===== 기본 리셋 ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 100%);
+  color: var(--text-primary);
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+/* ===== 타이포그래피 시스템 ===== */
+.typography-h1 {
+  font-size: 4rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.typography-h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: var(--text-primary);
+  margin-bottom: 1.5rem;
+}
+
+.typography-h3 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.typography-body {
+  font-size: 1.125rem;
+  font-weight: 400;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin-bottom: 1rem;
+}
+
+.typography-data {
+  font-size: 3rem;
+  font-weight: 700;
+  line-height: 1;
+  color: var(--slide-primary);
+  text-shadow: 0 0 20px rgba(var(--slide-primary), 0.4);
+}
+
+/* ===== 그라데이션 조합 ===== */
+.gradient-title {
+  background: linear-gradient(135deg, var(--slide-primary) 0%, var(--slide-secondary) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.gradient-data {
+  background: linear-gradient(90deg, var(--slide-secondary) 0%, var(--slide-accent) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* ===== 슬라이드 레이아웃 ===== */
+.presentation-container {
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
+}
+
+.slide {
+  width: 100%;
+  height: 100vh;
+  aspect-ratio: 16 / 9;
+  background: linear-gradient(135deg, var(--background-dark) 0%, var(--background-medium) 100%);
+  padding: var(--space-xl);
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: var(--space-lg);
+  overflow: hidden;
+  position: relative;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease-out;
+}
+
+.slide.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.slide-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  z-index: 10;
+}
+
+.slide-content {
+  display: grid;
+  gap: var(--space-lg);
+  align-items: center;
+  z-index: 5;
+}
+
+.slide-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  z-index: 10;
+}
+
+/* ===== 컨테이너 시스템 ===== */
+.chart-container {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 16px;
+  border: 1px solid var(--glass-border);
+  padding: var(--space-lg);
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.chart-container:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 30px rgba(var(--slide-primary), 0.2);
+}
+
+.card {
+  background: var(--glass-bg);
+  backdrop-filter: blur(12px);
+  border-radius: 12px;
+  border: 1px solid var(--glass-border);
+  padding: var(--space-md);
+  transition: all 0.3s ease;
+}
+
+.metric-card {
+  text-align: center;
+  background: linear-gradient(135deg, var(--slide-primary) 0%, var(--slide-secondary) 100%);
+  color: white;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  border: none;
+}
+
+.metric-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(var(--slide-primary), 0.4);
+}
+
+.metric-value {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.metric-label {
+  font-size: 0.875rem;
+  opacity: 0.9;
+}
+
+/* ===== 애니메이션 시스템 ===== */
+.slide-enter {
+  opacity: 0;
+  transform: translateY(30px);
+  animation: slideEnter 0.8s ease-out forwards;
+}
+
+@keyframes slideEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.stagger-animation > * {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: staggerItem 0.6s ease-out forwards;
+}
+
+.stagger-animation > *:nth-child(1) { animation-delay: 0.1s; }
+.stagger-animation > *:nth-child(2) { animation-delay: 0.2s; }
+.stagger-animation > *:nth-child(3) { animation-delay: 0.3s; }
+.stagger-animation > *:nth-child(4) { animation-delay: 0.4s; }
+.stagger-animation > *:nth-child(5) { animation-delay: 0.5s; }
+.stagger-animation > *:nth-child(6) { animation-delay: 0.6s; }
+
+@keyframes staggerItem {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 카운터 애니메이션 */
+.counter {
+  font-variant-numeric: tabular-nums;
+}
+
+/* 호버 효과 */
+.hover-lift {
+  transition: all 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.2);
+}
+
+.hover-glow {
+  transition: all 0.3s ease;
+}
+
+.hover-glow:hover {
+  box-shadow: 0 0 30px rgba(var(--slide-primary), 0.5);
+}
+
+/* 펄스 효과 */
+.pulse {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.7; }
+}
+
+/* ===== 유틸리티 클래스 ===== */
+.text-center { text-align: center; }
+.text-left { text-align: left; }
+.text-right { text-align: right; }
+
+.flex { display: flex; }
+.flex-col { flex-direction: column; }
+.items-center { align-items: center; }
+.justify-center { justify-content: center; }
+.justify-between { justify-content: space-between; }
+
+.grid { display: grid; }
+.grid-cols-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-cols-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-cols-4 { grid-template-columns: repeat(4, 1fr); }
+
+.gap-sm { gap: var(--space-sm); }
+.gap-md { gap: var(--space-md); }
+.gap-lg { gap: var(--space-lg); }
+.gap-xl { gap: var(--space-xl); }
+
+.mb-sm { margin-bottom: var(--space-sm); }
+.mb-md { margin-bottom: var(--space-md); }
+.mb-lg { margin-bottom: var(--space-lg); }
+.mb-xl { margin-bottom: var(--space-xl); }
+
+.p-sm { padding: var(--space-sm); }
+.p-md { padding: var(--space-md); }
+.p-lg { padding: var(--space-lg); }
+.p-xl { padding: var(--space-xl); }
+
+/* ===== 반응형 디자인 ===== */
+@media (max-width: 768px) {
+  .slide {
+    padding: var(--space-md);
+    grid-template-rows: auto 1fr;
+  }
+  
+  .typography-h1 { font-size: 2.5rem; }
+  .typography-h2 { font-size: 2rem; }
+  .typography-data { font-size: 2rem; }
+  
+  .slide-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-sm);
+  }
+
+  .grid-cols-2 { grid-template-columns: 1fr; }
+  .grid-cols-3 { grid-template-columns: 1fr; }
+  .grid-cols-4 { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 1024px) {
+  .slide {
+    padding: var(--space-lg);
+  }
+  
+  .typography-h1 { font-size: 3rem; }
+}
+
+/* ===== 성능 최적화 ===== */
+.gpu-accelerated {
+  will-change: transform, opacity;
+  transform: translateZ(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ===== 접근성 ===== */
+.focusable:focus {
+  outline: 2px solid var(--accent-purple);
+  outline-offset: 2px;
+}
+
+@media (prefers-contrast: high) {
+  :root {
+    --text-primary: #ffffff;
+    --text-secondary: #ffffff;
+    --background-dark: #000000;
+    --glass-border: rgba(255, 255, 255, 0.5);
+  }
+}

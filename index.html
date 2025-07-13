@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>데이터분석 팀 관리 개선 제안</title>
+  <meta name="description" content="AI 기반 자동화를 통한 데이터분석 팀 운영 효율성 극대화 방안">
+  
+  <!-- CSS 파일 -->
+  <link rel="stylesheet" href="css/design-system.css">
+  <link rel="stylesheet" href="css/slides.css">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iMzIiIHZpZXdCb3g9IjAgMCAzMiAzMiIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj4KPHBhdGggZD0iTTE2IDJMMjYgOFYyNEwxNiAzMEw2IDI0VjhMMTYgMloiIGZpbGw9IiMwODkxYjIiLz4KPHN2ZyB3aWR0aD0iMTYiIGhlaWdodD0iMTYiIHZpZXdCb3g9IjAgMCAxNiAxNiIgeD0iOCIgeT0iOCIgZmlsbD0id2hpdGUiPgo8cGF0aCBkPSJNMiA2aDEydjJIMlY2ek0yIDEwaDE0djJIMlYxMHpNMiAxNGgxNHYySDJWMTR6Ii8+Cjwvc3ZnPgo8L3N2Zz4K">
+</head>
+<body>
+  <!-- 프레젠테이션 컨테이너 -->
+  <div class="presentation-container">
+    
+    <!-- 슬라이드 1: 문제 정의/현황 분석 -->
+    <section class="slide slide-1 slide-problem" id="slide-1">
+      <!-- 슬라이드 헤더 -->
+      <header class="slide-header">
+        <div>
+          <h1 class="typography-h1 gradient-title">문제 정의</h1>
+          <p class="typography-h3">현황 분석 및 핵심 이슈 파악</p>
+        </div>
+        <div class="slide-meta">
+          <span class="slide-number">1 / 2</span>
+        </div>
+      </header>
+
+      <!-- 슬라이드 컨텐츠 -->
+      <main class="slide-content stagger-animation">
+        <!-- 문제 요약 -->
+        <div class="problem-summary card">
+          <h2 class="typography-h2">핵심 문제</h2>
+          <p class="typography-body">
+            데이터 분석 프로젝트의 복잡성 증가로 <strong>팀 간 협업 비효율</strong>과 
+            <strong>인사이트 도출 시간 지연</strong>이 발생하고 있습니다.
+          </p>
+          
+          <div class="key-metrics">
+            <div class="metric-item">
+              <div class="key-metric" data-counter="14">0</div>
+              <div class="metric-description">평균 처리 시간 (일)</div>
+            </div>
+            <div class="metric-item">
+              <div class="key-metric" data-counter="35">0</div>
+              <div class="metric-description">시간 증가율 (%)</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- 원형 차트: 분석 요청 유형별 비중 -->
+        <div class="problem-chart chart-container">
+          <h3 class="typography-h3">분석 요청 유형별 비중</h3>
+          <div class="pie-chart-container">
+            <!-- 차트는 JavaScript로 동적 생성 -->
+          </div>
+          <p class="chart-note">월 평균 <strong>120건</strong>의 요청 처리</p>
+        </div>
+
+        <!-- 타임라인 차트: 처리 시간 증가 추세 -->
+        <div class="timeline-chart chart-container">
+          <h3 class="typography-h3">처리 시간 증가 추세</h3>
+          <div class="timeline-container">
+            <!-- 차트는 JavaScript로 동적 생성 -->
+          </div>
+          <p class="chart-note">2023년 대비 <strong class="gradient-data">35% 증가</strong></p>
+        </div>
+
+        <!-- 병목 현상 정보 -->
+        <div class="bottleneck-info card">
+          <div class="bottleneck-icon">⏳</div>
+          <h3 class="typography-h3">병목 현상 심화</h3>
+          
+          <div class="bottleneck-stats">
+            <div class="stat-item">
+              <div class="stat-value">70%</div>
+              <div class="stat-label">전처리 시간 비중</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">150%</div>
+              <div class="stat-label">팀 업무 부하</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value">30%</div>
+              <div class="stat-label">중복 작업 발생률</div>
+            </div>
+            <div class="stat-item">
+              <div class="stat-value" data-counter="120">0</div>
+              <div class="stat-label">요청 대기 건수</div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 슬라이드 푸터 -->
+      <footer class="slide-footer">
+        <div>
+          <span>데이터분석팀 현황 분석</span>
+        </div>
+        <div>
+          <span>2025년 7월</span>
+        </div>
+      </footer>
+    </section>
+
+    <!-- 슬라이드 2: 솔루션/아이디어 제시 -->
+    <section class="slide slide-2 slide-solution" id="slide-2">
+      <!-- 슬라이드 헤더 -->
+      <header class="slide-header">
+        <div>
+          <h1 class="typography-h1 gradient-title">솔루션 제안</h1>
+          <p class="typography-h3">AI 기반 자동화 플랫폼 구축</p>
+        </div>
+        <div class="slide-meta">
+          <span class="slide-number">2 / 2</span>
+        </div>
+      </header>
+
+      <!-- 슬라이드 컨텐츠 -->
+      <main class="slide-content stagger-animation">
+        <!-- Before 메트릭 -->
+        <div class="before-metrics metrics-section before">
+          <h3>현재 상황</h3>
+          
+          <div class="metric-comparison">
+            <div class="comparison-value">14일</div>
+            <div class="comparison-label">평균 처리 시간</div>
+            <div class="improvement-indicator improvement-negative">병목 구간</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">150%</div>
+            <div class="comparison-label">분석가 업무 부하</div>
+            <div class="improvement-indicator improvement-negative">과부하 상태</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">0%</div>
+            <div class="comparison-label">자동화 비율</div>
+            <div class="improvement-indicator improvement-negative">수동 프로세스</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">6.2점</div>
+            <div class="comparison-label">사용자 만족도</div>
+            <div class="improvement-indicator improvement-negative">불만족 수준</div>
+          </div>
+        </div>
+
+        <!-- 프로세스 플로우 -->
+        <div class="process-flow">
+          <!-- 현재 프로세스 -->
+          <div class="flow-section">
+            <div class="flow-title">현재 프로세스 (14일)</div>
+            <div class="flow-steps">
+              <div class="flow-step current" data-tooltip="요청서 검토 및 우선순위 설정">
+                <div class="step-title">요청 접수</div>
+                <div class="step-time">1일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step current" data-tooltip="전문성과 업무 부하 고려 배정">
+                <div class="step-title">분석가 배정</div>
+                <div class="step-time">2일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step current" data-tooltip="데이터 정제, 변환, 통합">
+                <div class="step-title">데이터 전처리</div>
+                <div class="step-time">5일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step current" data-tooltip="통계 분석 및 모델링">
+                <div class="step-title">분석 수행</div>
+                <div class="step-time">4일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step current" data-tooltip="결과 정리 및 권고안 작성">
+                <div class="step-title">결과 보고</div>
+                <div class="step-time">2일</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- 화살표 -->
+          <div class="process-arrow" style="text-align: center; margin: 2rem 0;">
+            <div style="font-size: 2rem; color: var(--secondary-teal);">⬇</div>
+            <div style="font-size: 1.25rem; color: var(--text-primary); font-weight: 600;">AI 자동화 적용</div>
+          </div>
+
+          <!-- 개선된 프로세스 -->
+          <div class="flow-section">
+            <div class="flow-title">개선된 프로세스 (7일)</div>
+            <div class="flow-steps">
+              <div class="flow-step improved" data-tooltip="머신러닝 기반 자동 분류">
+                <div class="step-title">AI 자동 분류</div>
+                <div class="step-time">즉시</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step improved" data-tooltip="사전 정의된 룰 기반 처리">
+                <div class="step-title">자동 전처리</div>
+                <div class="step-time">1일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step improved" data-tooltip="사용자 직접 분석 수행">
+                <div class="step-title">셀프서비스</div>
+                <div class="step-time">2일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step improved" data-tooltip="전문가만 복잡한 분석 담당">
+                <div class="step-title">고급 분석</div>
+                <div class="step-time">3일</div>
+              </div>
+              <div class="flow-arrow">→</div>
+              <div class="flow-step improved" data-tooltip="AI 지원 빠른 도출">
+                <div class="step-title">인사이트 도출</div>
+                <div class="step-time">1일</div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- After 메트릭 -->
+        <div class="after-metrics metrics-section after">
+          <h3>예상 개선 효과</h3>
+          
+          <div class="metric-comparison">
+            <div class="comparison-value">7일</div>
+            <div class="comparison-label">평균 처리 시간</div>
+            <div class="improvement-indicator improvement-positive">-50% 단축</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">100%</div>
+            <div class="comparison-label">분석가 업무 부하</div>
+            <div class="improvement-indicator improvement-positive">정상화</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">60%</div>
+            <div class="comparison-label">자동화 비율</div>
+            <div class="improvement-indicator improvement-positive">+60% 증가</div>
+          </div>
+
+          <div class="metric-comparison">
+            <div class="comparison-value">8.5점</div>
+            <div class="comparison-label">사용자 만족도</div>
+            <div class="improvement-indicator improvement-positive">+37% 향상</div>
+          </div>
+        </div>
+
+        <!-- 솔루션 핵심 요소 -->
+        <div class="solution-icons">
+          <div class="solution-icon hover-lift" data-tooltip="데이터 수집 및 전처리 자동화">
+            <div class="icon-symbol">🤖</div>
+            <div class="icon-title">AI 자동화</div>
+            <div class="icon-description">반복 작업 70% 감소</div>
+          </div>
+
+          <div class="solution-icon hover-lift" data-tooltip="직관적인 분석 대시보드 제공">
+            <div class="icon-symbol">📊</div>
+            <div class="icon-title">셀프서비스</div>
+            <div class="icon-description">단순 요청 60% 감소</div>
+          </div>
+
+          <div class="solution-icon hover-lift" data-tooltip="분석 템플릿 라이브러리 구축">
+            <div class="icon-symbol">🔄</div>
+            <div class="icon-title">재사용성</div>
+            <div class="icon-description">재활용률 80% 달성</div>
+          </div>
+        </div>
+      </main>
+
+      <!-- 슬라이드 푸터 -->
+      <footer class="slide-footer">
+        <div>
+          <span>예상 투자비: 5억원 | ROI: 1년 내 BEP 달성</span>
+        </div>
+        <div>
+          <span>연간 4.5억원 비용 절감 효과</span>
+        </div>
+      </footer>
+    </section>
+  </div>
+
+  <!-- JavaScript 파일 -->
+  <script src="assets/data.js"></script>
+  <script src="js/main.js"></script>
+
+  <!-- 성능 최적화 및 인터랙션 -->
+  <script>
+    // 터치 제스처 지원 (모바일)
+    let touchStartX = 0;
+    let touchEndX = 0;
+
+    document.addEventListener('touchstart', (e) => {
+      touchStartX = e.changedTouches[0].screenX;
+    });
+
+    document.addEventListener('touchend', (e) => {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    });
+
+    function handleSwipe() {
+      const swipeThreshold = 50;
+      const diff = touchStartX - touchEndX;
+
+      if (Math.abs(diff) > swipeThreshold) {
+        if (diff > 0 && window.slideshow) {
+          // 왼쪽 스와이프 - 다음 슬라이드
+          window.slideshow.nextSlide();
+        } else if (diff < 0 && window.slideshow) {
+          // 오른쪽 스와이프 - 이전 슬라이드
+          window.slideshow.prevSlide();
+        }
+      }
+    }
+
+    // 접근성 개선
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'F11') {
+        e.preventDefault();
+        if (document.fullscreenElement) {
+          document.exitFullscreen();
+        } else {
+          document.documentElement.requestFullscreen();
+        }
+      }
+    });
+
+    // 성능 모니터링
+    window.addEventListener('load', () => {
+      if (performance.mark) {
+        performance.mark('presentation-loaded');
+        console.log('프레젠테이션 로드 완료');
+      }
+    });
+
+    // 이미지 지연 로딩 (향후 확장용)
+    if ('IntersectionObserver' in window) {
+      const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const img = entry.target;
+            if (img.dataset.src) {
+              img.src = img.dataset.src;
+              img.classList.remove('lazy');
+              imageObserver.unobserve(img);
+            }
+          }
+        });
+      });
+
+      document.querySelectorAll('img[data-src]').forEach(img => {
+        imageObserver.observe(img);
+      });
+    }
+  </script>
+
+</body>
+</html>
