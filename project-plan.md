@@ -48,16 +48,18 @@
 ## 📁 파일 구조
 ```
 /Users/frindle/@WorkSpace/ClaudeProjects/MakeSlides/
-├── index.html              # 메인 프레젠테이션 파일
-├── css/
-│   ├── design-system.css   # 디자인 시스템 (색상, 타이포그래피, 기본 스타일)
-│   └── slides.css          # 슬라이드별 전용 스타일과 컴포넌트
-├── js/
-│   └── main.js             # 메인 슬라이드 기능과 인터랙션
-├── assets/
-│   └── data.js             # 슬라이드 데이터와 차트 유틸리티
-└── docs/
-    └── project-plan.md     # 이 파일
+├── README.md               # 프로젝트 컬렉션 메인 설명서
+└── 01.DataMgmt/           # 데이터 분석팀 관리 슬라이드 프로젝트
+    ├── index.html              # 메인 프레젠테이션 파일
+    ├── css/
+    │   ├── design-system.css   # 디자인 시스템 (색상, 타이포그래피, 기본 스타일)
+    │   └── slides.css          # 슬라이드별 전용 스타일과 컴포넌트
+    ├── js/
+    │   └── main.js             # 메인 슬라이드 기능과 인터랙션
+    ├── assets/
+    │   └── data.js             # 슬라이드 데이터와 차트 유틸리티
+    └── docs/
+        └── project-plan.md     # 이 파일
 ```
 
 ## 🎨 디자인 시스템
@@ -332,7 +334,25 @@
 
 **🎊 축하합니다! 데이터분석 팀 관리 개선을 위한 완전한 프레젠테이션 도구가 완성되었습니다!**
 
-📂 **파일 위치**: `/Users/frindle/@WorkSpace/ClaudeProjects/MakeSlides/index.html`  
-🌐 **브라우저 접근**: 이미 새 탭에서 열려 있습니다  
+**📂 파일 위치**: `/Users/frindle/@WorkSpace/ClaudeProjects/MakeSlides/01.DataMgmt/index.html`  
+🌐 **브라우저 접근**: 새 구조에서 01.DataMgmt 폴더 내 index.html 실행  
 ⚡ **사용법**: 키보드 화살표, 하단 도트, 터치 스와이프로 6개 슬라이드 탐색  
 🎯 **다음 단계**: 경영진 프레젠테이션 준비 완료!
+
+## 🔄 프로젝트 구조 변경 사항 (2025.07.13)
+
+### 변경 내용
+- **이전**: `/Users/frindle/@WorkSpace/ClaudeProjects/MakeSlides/` (단일 프로젝트)
+- **이후**: `/Users/frindle/@WorkSpace/ClaudeProjects/MakeSlides/01.DataMgmt/` (프로젝트 컬렉션)
+
+### 구조 개선 효과
+1. **확장성**: 향후 여러 슬라이드 프로젝트 관리 가능
+2. **체계성**: 프로젝트별 독립적 Git 저장소 운영
+3. **협업**: 프로젝트별 팀 할당 및 병렬 작업 지원
+4. **유지보수**: 각 프로젝트의 의존성과 설정 분리
+
+### Git 저장소 현황
+- **원격 저장소**: https://github.com/jeehoon0310/DataMgmt-Slides.git
+- **브랜치**: main
+- **최신 커밋**: "[프로젝트구조] 01.DataMgmt 서브프로젝트로 이동"
+- **상태**: 배포 완료 ✅
